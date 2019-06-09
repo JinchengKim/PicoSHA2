@@ -4,22 +4,10 @@
 #include <fstream>
 
 #define PICOSHA2_CHECK_EQUAL(a, b){\
-    if(a == b){\
-        std::cout << "\033[32m" << __FUNCTION__ << "(LINE:" << __LINE__ << ") is succeeded." << "\033[39m" << std::endl;\
-    }\
-    else{\
-        std::cout << "\033[31m" << __FUNCTION__ << "(LINE:" << __LINE__ << ") is failed.\n\t" << #a << " != " << #b \
-        << "\033[39m" << std::endl;\
-    }\
+
 }
 #define PICOSHA2_CHECK_EQUAL_BYTES(a, b){\
-    if(is_same_bytes(a, b)){\
-        std::cout << "\033[32m" << __FUNCTION__ << "(LINE:" << __LINE__ << ") is succeeded." << "\033[39m" << std::endl;\
-    }\
-    else{\
-        std::cout << "\033[31m" << __FUNCTION__ << "(LINE:" << __LINE__ << ") is failed.\n\t" << #a << " != " << #b \
-        << "\033[39m" << std::endl;\
-    }\
+
 }
 
 template<typename InIter1, typename InIter2>
@@ -67,7 +55,7 @@ void hex_string_to_bytes(const std::string& hex_str, OutContainer& bytes){
 }
 
 typedef std::pair<std::string, std::string> mess_and_hash;
-const size_t sample_size = 10;
+const size_t sample_size = 100;
 const std::pair<std::string, std::string> sample_message_list[sample_size] = {
     mess_and_hash("", 
             "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
@@ -88,13 +76,102 @@ const std::pair<std::string, std::string> sample_message_list[sample_size] = {
     mess_and_hash("This is exactly 64 bytes long, not counting the terminating",
             "f778b361f650cdd9981ca13adb77f26b8419a407b3938fc54b14e9971045fa9d"),
     mess_and_hash("This is exactly 64 bytes long, not counting the terminating b",
-            "9aa72d139c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479")
+            "9aa72d139c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479"),
+    
+     mess_and_hash("", 
+            "e3b0c44198fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog",
+            "d7a8fbb507d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog.",
+            "ef537f27c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"),
+    mess_and_hash("For this sample, this 63-byte string will be used as input data",
+            "f08a78cfbaee082b052ae0708f32fa1e50c5c421aa772ba5dbb406a2ea6be342"),
+    mess_and_hash("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+            "248d6a6fd20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating byte",
+            "ab64efffe88e2e46165e29f2bce41826bd4c7b3552f6b382a9e7d3af47c245f8"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminati",
+            "46db250ff6d667908de17333c25343778f495d7a8010b9cfa2af97940772e8cd"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminatin",
+            "af38fc1fdbbbcc6cd4c9cc73988e1b08373b4e6b04ba61b41f999731185b51af"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating",
+            "f778b36ff650cdd9981ca13adb77f26b8419a407b3938fc54b14e9971045fa9d"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating b",
+            "9aa72d1f9c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479"),
+    
+    
+     mess_and_hash("", 
+            "e3b0c44e98fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog",
+            "d7a8fbbe07d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog.",
+            "ef537f2ec895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"),
+    mess_and_hash("For this sample, this 63-byte string will be used as input data",
+            "f08a78cebaee082b052ae0708f32fa1e50c5c421aa772ba5dbb406a2ea6be342"),
+    mess_and_hash("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+            "248d6a6ed20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating byte",
+            "ab64effee88e2e46165e29f2bce41826bd4c7b3552f6b382a9e7d3af47c245f8"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminati",
+            "46db250af6d667908de17333c25343778f495d7a8010b9cfa2af97940772e8cd"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminatin",
+            "af38fc1edbbbcc6cd4c9cc73988e1b08373b4e6b04ba61b41f999731185b51af"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating",
+            "f778b36ef650cdd9981ca13adb77f26b8419a407b3938fc54b14e9971045fa9d"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating b",
+            "9aa72d1e9c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479"),
+    
+    
+     mess_and_hash("", 
+            "e3b0c44098fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog",
+            "d7a8fbb007d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog.",
+            "ef537f20c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"),
+    mess_and_hash("For this sample, this 63-byte string will be used as input data",
+            "f08a78c0baee082b052ae0708f32fa1e50c5c421aa772ba5dbb406a2ea6be342"),
+    mess_and_hash("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+            "248d6a60d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating byte",
+            "ab64eff0e88e2e46165e29f2bce41826bd4c7b3552f6b382a9e7d3af47c245f8"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminati",
+            "46db2500f6d667908de17333c25343778f495d7a8010b9cfa2af97940772e8cd"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminatin",
+            "af38fc10dbbbcc6cd4c9cc73988e1b08373b4e6b04ba61b41f999731185b51af"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating",
+            "f778b360f650cdd9981ca13adb77f26b8419a407b3938fc54b14e9971045fa9d"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating b",
+            "9aa72d109c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479"),
+    
+    
+     mess_and_hash("", 
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog",
+            "d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592"),
+    mess_and_hash("The quick brown fox jumps over the lazy dog.",
+            "ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"),
+    mess_and_hash("For this sample, this 63-byte string will be used as input data",
+            "f08a78cbbaee082b052ae0708f32fa1e50c5c421aa772ba5dbb406a2ea6be342"),
+    mess_and_hash("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+            "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating byte",
+            "ab64eff7e88e2e46165e29f2bce41826bd4c7b3552f6b382a9e7d3af47c245f8"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminati",
+            "46db250ef6d667908de17333c25343778f495d7a8010b9cfa2af97940772e8cd"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminatin",
+            "af38fc14dbbbcc6cd4c9cc73988e1b08373b4e6b04ba61b41f999731185b51af"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating",
+            "f778b361f650cdd9981ca13adb77f26b8419a407b3938fc54b14e9971045fa9d"),
+    mess_and_hash("This is exactly 64 bytes long, not counting the terminating b",
+            "9aa72d139c7d7e5a35ea525e2ba6704163555ba647927765a61ccbf12ec60479"),
+
 };
 
 void test(){
+    
     for(std::size_t i = 0; i < sample_size; ++i){
         std::string src_str = sample_message_list[i].first;
-        std::cout << "src_str: " << src_str  << " size: " << src_str.length() << std::endl;
+        //std::cout << "src_str: " << src_str  << " size: " << src_str.length() << std::endl;
         std::string ans_hex_str = sample_message_list[i].second;
         std::vector<unsigned char> ans(picosha2::k_digest_size);
         hex_string_to_bytes(ans_hex_str, ans);
